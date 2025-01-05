@@ -4,9 +4,12 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Raycaster } from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-// import { TTFLoader, Font } from 'three/examples/jsm/loaders/TTFLoader.js';
-// import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-// import { Font } from "three/examples/jsm/loaders/Fontloader.js";
+import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import { Font } from "three/examples/jsm/loaders/FontLoader.js";
+// import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
+// import { Line2 } from "three/examples/jsm/lines/Line2.js";
+// import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 
 // for tracking when everything is loaded
 let totalAssets = 0;
@@ -572,36 +575,36 @@ function animate() {
 
 animate();
 
-// function handleWindowResize() {
-//     camera.aspect = window.innerWidth / window.innerHeight;
-//     camera.updateProjectionMatrix();
-//     renderer.setSize(window.innerWidth, window.innerHeight);
-// }
-// window.addEventListener('resize', handleWindowResize, false);
+function handleWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', handleWindowResize, false);
 
-// const fontLoader = new TTFLoader();
-// fontLoader.load("./Lacupra-Bubble.ttf", (res) => {
-//     const font = new Font(res);
-//     const props = {
-//         font,
-//         size: 1,
-//         depth: .5,
-//         curveSegments: 6,
-//         bevelEnabled: true,
-//         bevelThickness: 0.08,
-//         bevelSize: 0.01,
-//         bevelOffset: 0,
-//         bevelSegments: 2,
-//     };
-//     const textGeo = new TextGeometry("Abby Reese", props);
-//     textGeo.computeBoundingBox();
-//     const centerOffset = -0.5 * (
-//         textGeo.boundingBox.max.x = textGeo.boundingBox.min.x
-//     );
-//     const mat = new THREE.MeshStandardMaterial({ color: 0xff9900});
-//     const textMesh = new THREE.Mesh(textGeo, mat);
-//     // textMesh.postition.x = centerOffset;
-//     scene.add(textMesh);
-//     // console.log(res)
+const fontLoader = new TTFLoader();
+fontLoader.load("./Lacupra-Bubble.ttf", (res) => {
+    const font = new Font(res);
+    const props = {
+        font,
+        size: 1,
+        depth: .5,
+        curveSegments: 6,
+        bevelEnabled: true,
+        bevelThickness: 0.08,
+        bevelSize: 0.01,
+        bevelOffset: 0,
+        bevelSegments: 2,
+    };
+    const textGeo = new TextGeometry("Abby Reese", props);
+    textGeo.computeBoundingBox();
+    const centerOffset = -0.5 * (
+        textGeo.boundingBox.max.x - textGeo.boundingBox.min.x
+    );
+    const mat = new THREE.MeshStandardMaterial({ color: 0xff9900});
+    const textMesh = new THREE.Mesh(textGeo, mat);
+    // textMesh.postition.x = centerOffset;
+    scene.add(textMesh);
+    // console.log(res)
 
-// });
+});
