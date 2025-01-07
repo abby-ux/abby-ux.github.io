@@ -1,16 +1,15 @@
 import './style.css';
 
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { Raycaster } from 'three';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import { Font } from "three/examples/jsm/loaders/FontLoader.js";
-import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
-import { Line2 } from "three/examples/jsm/lines/Line2.js";
-import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
-import { AudioListener } from 'three';
+import * as THREE from '/node_modules/three/build/three.module.js';
+import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
+import { Raycaster } from '/node_modules/three/src/core/Raycaster.js';
+import { FBXLoader } from '/node_modules/three/examples/jsm/loaders/FBXLoader.js';
+import { TTFLoader } from '/node_modules/three/examples/jsm/loaders/TTFLoader.js';
+import { TextGeometry } from '/node_modules/three/examples/jsm/geometries/TextGeometry.js';
+import { Font } from '/node_modules/three/examples/jsm/loaders/FontLoader.js';
+import { LineMaterial } from '/node_modules/three/examples/jsm/lines/LineMaterial.js';
+import { Line2 } from '/node_modules/three/examples/jsm/lines/Line2.js';
+import { LineGeometry } from '/node_modules/three/examples/jsm/lines/LineGeometry.js';
 
 // for tracking when everything is loaded
 let totalAssets = 0;
