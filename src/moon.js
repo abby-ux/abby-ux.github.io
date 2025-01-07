@@ -4,13 +4,92 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Raycaster } from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-// import { TTFLoader, Font } from 'three/examples/jsm/loaders/TTFLoader.js';
-// import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-// import { Font } from "three/examples/jsm/loaders/Fontloader.js";
+import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import { Font } from "three/examples/jsm/loaders/FontLoader.js";
+import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
+import { Line2 } from "three/examples/jsm/lines/Line2.js";
+import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
+import { AudioListener } from 'three';
 
 // for tracking when everything is loaded
 let totalAssets = 0;
 let loadedAssets = 0;   
+
+const p1text = `
+<div>
+    <h3>React, Node.js, Express, Postgresql</h3>
+    <p><strong>Problem:</strong> My mom bough the 'Couch Guestbook' which is a fun guest log, but no one ever takes the time to fill it out.</p>
+    <p><strong>Solution:</strong> Convert the guestbook into a digital logging system, where users can scan a QR code to fill out the guestbook log on their phone.</p>
+    <p></p>
+    <ul>
+      <li>
+        
+        I created a full-stack web application that streamlines the guestbook experience through QR codes, solving the
+challenge of gathering guest logs on paper. I did this by developing a React frontend with Firebase authentication and
+implementing a Node.js/Express backend with PostgreSQL. The project resulted as a scalable system that enables families,
+friends, and businesses to generate, manage, and analyze guest reviews through easily deployable QR codes. I am planning on deploying this website
+once I can polish the styling, but I have personally used this for guestbook logs.
+            
+      <li>
+        I designed an intuitive user interface for creating, sorting, and managing QR code-based logs, addressing
+user friction by implementing dynamic form customization, mobile-responsive layouts using Tailwind CSS, and
+streamlined navigation flows. Users have a seamless experience that allows users to generate QR codes, customize
+guestbook form fields, and view submitted forms in an organized dashboard.
+
+      
+    </ul>
+    <p><strong>Project Takeaways:</strong>
+    This was my first time learning about and using indexes. This was also the first robust CRUD application I created, which taught me a lot about RESTful APIs. Lastly, I learned about rate limiting by checking a users IP addresses.
+    </p>
+    <a href="https://github.com/abby-ux/LogQR" class="project-link">GitHub</a>
+</div>
+                  `;
+
+
+const p2text = `
+<div>
+    <h3>React, Node.js, Express, MongoDB, Socket.io</h3>
+    <p><strong>Problem:</strong>I love doing karaoke with my friends, but it gets difficult to keep the sessions interesting or structured in large groups sometimes.</p>
+    <p><strong>Solution:</strong>Create a website that lets users host gamified karaoke session for their friends to join! Use YouTube to pull karaoke playlists and songs.</p>
+    <p></p>
+    <ul>
+      <li>
+        This project is not finished yet, but so far I have implement a waiting room where the host and users are able to see players that 
+        join in real time, using Socket.io. I used MongoDB and mongoose to track user and game creations, and I used RESTful apis to manage creating and accessing game and player information.
+             
+    </ul>
+    <p><strong>Project Takeaways:</strong>
+    This project taught me how important design planning was. I did not factor real time functionality into my first iteration and had a lot of trouble integrating Socket.io at first. After I took a step back, I realized my mistake with Socket.io and learned a lot about 
+    the importance of planning ahead of time. Although I did not end up choosing Spotify to get playlists, I did test it out and learned 
+    some valuable things about using Spotify APIs through this.
+    </p>
+    <a href="https://github.com/abby-ux/karaoke-jam" class="project-link">GitHub</a>
+</div>
+                  `;
+          
+                  
+const p3text = `
+<div>
+    <h3>React, Node.js, Express, SQLite3</h3>
+    <p><strong>Problem:</strong>Come up with an interesting project (that doesn't envolve writing as essay) for my Tech & Human values
+    final class project.</p>
+    <p><strong>Solution:</strong>Create a chatbot that discusses ethical dilemmas from various philisophical perspectives using rule 
+    based JSON responses.</p>
+    <p></p>
+    <ul>
+      <li>
+      I implemented a full-stack web app that first has a user fill out a form on various opinions, then chat with a chatbot, and fill out another form after the conversation. The goal of this project was to measure humans fascination with technology, and how it can be dangerous at times.
+      <li>
+      I created my backend with Express and SQLite to save form responses and chat conversations that I later analyzed.
+     
+    </ul>
+    <p><strong>Project Takeaways:</strong>
+    Although this started at a project for a philiosophy class I had a great time making it. Using JSON responses was very simple, and it opened my eyes to how easily humans will assume any type of technology is intelligent. This was my first time using SQLite and it was a great experience.
+    </p>
+    <a href="https://github.com/abby-ux/philisophical-dilemmas-chatbot" class="project-link">GitHub</a>
+</div>
+                  `;
 
 function updateLoadingProgress() {
     loadedAssets++;
@@ -59,6 +138,22 @@ const scene = new THREE.Scene();
 // - field of view (75/360), aspect ratio (based off browser window), view frustrum (many objects are visible from camera lense)
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
+// ADD AUDIO ???
+const listener = new THREE.AudioListener();
+camera.add(listener);
+// create a global audio source
+const sound = new THREE.Audio( listener );
+
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new THREE.AudioLoader();
+//______________________________________________________________________ -- add audio
+// audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
+// 	sound.setBuffer( buffer );
+// 	sound.setLoop( true );
+// 	sound.setVolume( 0.5 );
+// 	sound.play();
+// });
+
 // render graphics in scene
 // use canvas as dom element to render from
 const renderer = new THREE.WebGLRenderer({
@@ -68,7 +163,12 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio( window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 // move position farther from middle fo scene
-camera.position.setZ(30);
+camera.position.set(0, 0, 1);
+// camera.position.setZ(30);
+// const initialScrollTop = document.body.getBoundingClientRect().top;
+// camera.position.z = initialScrollTop * -0.01;
+// camera.position.x = initialScrollTop * -0.0002;
+// camera.position.y = initialScrollTop * -0.0002;
 
 renderer.render(scene, camera);
 
@@ -87,17 +187,29 @@ const torus = new THREE.Mesh( geometry, material );
 
 // scene.add(torus);
 
-const pointLight = new THREE.PointLight(0xffffff, 700); 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Lower intensity for ambient to maintain contrast
+const spotLight = new THREE.PointLight(0xffffff, 700); 
+spotLight.position.set(0, 10, 10); // Position above and in front of the text
+spotLight.angle = Math.PI / 4; // 45-degree angle
+spotLight.penumbra = 0.1; // Soft edge of the spotlight
+spotLight.decay = 2; // Physical light decay
+spotLight.distance = 200; // Maximum distance of light
+spotLight.position.set(0, 0, -10); // Point at the text position
+const ambientLight = new THREE.AmbientLight(0xffffff, 4); // Lower intensity for ambient to maintain contrast
+const movingLight1 = new THREE.PointLight(0xffffff, 100); 
+const movingLight2 = new THREE.PointLight(0xffffff, 100); // White light
+const movingLight3 = new THREE.PointLight(0xffffff, 100);
 
-pointLight.position.set(4,4,4);
+// spotLight.position.set(4,4,4);
 
 // add the object (light) to the scene
-scene.add(pointLight, ambientLight);
+scene.add(spotLight);
+// scene.add(spotLight.target);
+scene.add(movingLight1, movingLight2);
 
-const lightHelper = new THREE.PointLightHelper(pointLight);
-const gridHelper = new THREE.GridHelper(200, 50);
-scene.add(lightHelper, gridHelper);
+const lightHelper = new THREE.PointLightHelper(spotLight);
+// const gridHelper = new THREE.GridHelper(200, 50);
+// scene.add(lightHelper, gridHelper);
+scene.add(lightHelper);
 
 // listen to dom events from mouse, update camera setting accordingly
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -122,6 +234,7 @@ function addArrow() {
                         emissiveIntensity: 0.2 // Controls glow strength
                     });
                     child.material = newMaterial;
+                    child.renderOrder = -1;
                 }
             });
             // Random position
@@ -357,7 +470,8 @@ const abby = new THREE.Mesh(
     new THREE.MeshBasicMaterial({ 
       map: p1Texture,
       transparent: true,
-      opacity: 0 
+      opacity: 0,
+      side: THREE.DoubleSide
     })
   );
   abby.name = 'abby1';
@@ -367,7 +481,8 @@ const abby = new THREE.Mesh(
     new THREE.MeshBasicMaterial({ 
       map: p2Texture,
       transparent: true,
-      opacity: 0
+      opacity: 0,
+      side: THREE.DoubleSide
     })
   );
   abby2.name = 'abby2';
@@ -377,7 +492,8 @@ const abby = new THREE.Mesh(
     new THREE.MeshBasicMaterial({ 
       map: p3Texture,
       transparent: true,
-      opacity: 0
+      opacity: 0,
+      side: THREE.DoubleSide
     })
   );
   abby3.name = 'abby3';
@@ -421,41 +537,79 @@ const moon = new THREE.Mesh(
   })
 );
 
-scene.add(moon);
+// scene.add(moon);
 
 // = vs set does same thing
 moon.position.z = 30;
 moon.position.setX(-10);
 
 window.addEventListener('click', (event) => {
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects([moon, abby, abby2, abby3]);
-
-    if (intersects.length > 0) {
-        const clickedObject = intersects[0].object;
-        
-        // Only handle click if object is visible (opacity > 0)
-        if (clickedObject.material.opacity > 0) {
-            switch(clickedObject.name) {
-                case 'abby1':
-                    window.location.href = '/p1.html';
-                    break;
-                case 'abby2':
-                    window.location.href = '/p2.html';
-                    break;
-                case 'abby3':
-                    window.location.href = '/p3.html';
-                    break;
-                default:
-                    if (clickedObject === moon) {
-                        window.location.href = '/home.html';
-                    }
-            }
-        }
+  // First check if we clicked a close button
+  if (event.target.classList.contains('exit-btn')) {
+    // Stop event from propagating to prevent raycaster handling
+    event.stopPropagation();
+    const popup = event.target.closest('.popup');
+    if (popup) {
+      popup.classList.add('hidden');
     }
+    return; 
+  }
+
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects([abby, abby2, abby3]);
+
+  if (intersects.length > 0) {
+      const clickedObject = intersects[0].object;
+      
+      // Only handle click if object is visible (opacity > 0)
+      if (clickedObject.material.opacity > 0) {
+          switch(clickedObject.name) {
+              case 'abby1':
+                  const popup1 = document.getElementById('popup1');
+                  const popupContent1 = document.getElementById('popup-content1');
+                  popupContent1.innerHTML = p1text;
+                  popup1.classList.remove('hidden');
+                  break;
+              case 'abby2':
+                  const popup2 = document.getElementById('popup2');
+                  const popupContent2 = document.getElementById('popup-content2');
+                  popupContent2.innerHTML = p2text;
+                  popup2.classList.remove('hidden');
+                  break;
+              case 'abby3':
+                  const popup3 = document.getElementById('popup3');
+                  const popupContent3 = document.getElementById('popup-content3');
+                  popupContent3.innerHTML = p3text;
+                  popup3.classList.remove('hidden');
+                  break;
+          }
+      }
+  }
+});
+
+// Add event listeners for all close buttons
+document.getElementById('exit-btn1').addEventListener('click', () => {
+  document.getElementById('popup1').classList.add('hidden');
+});
+
+document.getElementById('exit-btn2').addEventListener('click', () => {
+  document.getElementById('popup2').classList.add('hidden');
+});
+
+document.getElementById('exit-btn3').addEventListener('click', () => {
+  document.getElementById('popup3').classList.add('hidden');
+});
+
+// Optional: Close popup when clicking outside
+document.querySelectorAll('.popup').forEach(popup => {
+  popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+          popup.classList.add('hidden');
+      }
+  });
 });
 
 // Add mousemove event listener
@@ -492,9 +646,14 @@ window.addEventListener('mousemove', (event) => {
 
 function moveCamera() {
     const t = document.body.getBoundingClientRect().top;
-    moon.rotation.x += 0.05;
-    moon.rotation.y += 0.075;
-    moon.rotation.z += 0.05;
+
+    camera.position.z = 1 + (t * -0.01);  
+    camera.position.x = t * -0.0002;
+    camera.position.y = t * -0.0002;
+
+    // moon.rotation.x += 0.05;
+    // moon.rotation.y += 0.075;
+    // moon.rotation.z += 0.05;
   
     // First abby appears after scrolling down 300px
     if (t < -300) {
@@ -523,15 +682,39 @@ function moveCamera() {
       abby3.material.opacity = 0;
     }
   
-    camera.position.z = t * -0.01;
-    camera.position.x = t * -0.0002;
-    camera.position.y = t * -0.0002;
   }
-
+  // moveCamera();
 document.body.onscroll = moveCamera
 
+let text;
+let subtitle;
+function initScene(res) {
+  const font = new Font(res);
+  text = createText({ font, message: "Abby Reese" });
+  subtitle = createSubtitle({ font, message: `Computer Science\n @ Northeastern University`})
+  scene.add(text, subtitle);
+  animate();
+}
+function loadFont() {
+  const loader = new TTFLoader();
+  loader.load("./Lacupra-Bubble.ttf", (res) => {
+    const font = new Font(res);
+    text = createText({ font, message: "Abby Reese" });
+    // subtitle = createSubtitle({ font, message: "Computer Science @ Northeastern University"})
+    scene.add(text);
+    animate();
+  });
+  loader.load("./HEXA.ttf", (res) => {
+    const font = new Font(res);
+  // text = createText({ font, message: "Abby Reese" });
+  subtitle = createSubtitle({ font, message: `Computer Science\n @ Northeastern University`})
+  scene.add(subtitle);
+  animate();
+  });
+}
+
 // set up recursice function (endless) that automatically rerenders
-function animate() {
+function animate(timeStep) {
   requestAnimationFrame(animate);
 
   // amount change per animation frame
@@ -543,7 +726,21 @@ function animate() {
 
   // Update the picking ray with the camera and mouse position
   raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects([moon, abby, abby2, abby3]);
+  // Move lights in a circular pattern
+  const time = Date.now() * 0.001; // Convert to seconds
+  movingLight1.position.x = Math.sin(time) * 5;
+  movingLight1.position.z = Math.cos(time) * 5;
+  movingLight1.position.y = Math.cos(time * 0.5) * 2;
+
+  movingLight2.position.x = Math.sin(time * 0.5) * 10;
+  movingLight2.position.z = Math.cos(time * 0.5) * 10;
+  movingLight2.position.y = Math.sin(time) * 2;
+
+  movingLight3.position.x = Math.sin(time) * 40;
+  movingLight3.position.z = Math.cos(time) * 40;
+  movingLight3.position.y = Math.cos(time * 0.5) * 10;
+
+  const intersects = raycaster.intersectObjects([abby, abby2, abby3]);
   
   // Change cursor if intersecting with a visible object
   if (intersects.length > 0 && 
@@ -566,18 +763,182 @@ function animate() {
     computer.rotation.z += computer.rotationSpeed.z;
   });
 
+  text.userData.update(timeStep);
 
   renderer.render(scene, camera);
 }
 
-animate();
 
-// function handleWindowResize() {
-//     camera.aspect = window.innerWidth / window.innerHeight;
-//     camera.updateProjectionMatrix();
-//     renderer.setSize(window.innerWidth, window.innerHeight);
-// }
-// window.addEventListener('resize', handleWindowResize, false);
+function handleWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', handleWindowResize, false);
+
+const cubeTextureLoader = new THREE.CubeTextureLoader();
+const envMap = cubeTextureLoader.load([
+    'px.jpg', 'nx.jpg',
+    'py.jpg', 'ny.jpg',
+    'pz.jpg', 'nz.jpg'
+]);
+
+
+function createOutlines({ font, message }) {
+  const strokeGroup = new THREE.Group();
+
+  let totalDist = 1.0;
+  const lineMaterial = new LineMaterial({
+    color: 0xff69b4,
+    linewidth: 3,
+    dashed: true,
+    dashSize: totalDist * 2,
+    gapSize: totalDist * 2,
+    dashOffset: Math.random() * totalDist,
+  });
+
+  function getStrokeMesh({ shape, i = 0.0 }) {
+    let points = shape.getPoints();
+    let points3d = [];
+    points.forEach((p) => {
+      points3d.push(p.x, p.y, 0);
+    });
+    const lineGeo = new LineGeometry();
+    lineGeo.setPositions(points3d);
+  
+    totalDist = shape.getLength();
+    lineMaterial.dashSize = totalDist * 2;
+    lineMaterial.gapSize = totalDist * 2;
+    lineMaterial.dashOffset = Math.random() * totalDist;
+    // lineMaterial.position.z = -1;
+    
+    const strokeMesh = new Line2(lineGeo, lineMaterial);
+    strokeMesh.computeLineDistances();
+    let offset = i * 0;
+    strokeMesh.userData.update = (t) => {
+      strokeMesh.material.dashOffset = t * (totalDist * 0.1) + offset;
+    };
+    strokeMesh.position.z = -4;
+    return strokeMesh;
+  }
+  const shapes = font.generateShapes(message, 1);
+  shapes.forEach((s, i) => {
+    strokeGroup.add(getStrokeMesh({ shape: s, i }));
+
+    if (s.holes?.length > 0) {
+      s.holes.forEach((h) => {
+        strokeGroup.add(getStrokeMesh({ shape: h, i }));
+      });
+    }
+  });
+  strokeGroup.update = (t, i) => {
+    strokeGroup.children.forEach((c) => {
+      c.userData.update?.(t);
+    });
+  };
+  return strokeGroup;
+}
+
+function createSubtitle({ font, message }) {
+  const textGroup = new THREE.Group();
+  const props = {
+    font,
+    size: .5,
+    depth: 0.1,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: 0.08,
+    bevelSize: 0.01,
+    bevelOffset: 0,
+    bevelSegments: 2,
+  };
+  const textGeo = new TextGeometry(message, props);
+  textGeo.computeBoundingBox();
+  const centerOffset = -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
+  const glassMat = new THREE.MeshPhysicalMaterial({
+    roughness: 0.5,
+    transmission: 1.0,
+    transparent: true,
+    thickness: 1.0,
+    color: 0xFF69B4
+  });
+  const textMesh = new THREE.Mesh(textGeo, glassMat);
+  // const textMesh = new THREE.Mesh(textGeo);
+  textMesh.position.x = centerOffset;
+  textMesh.position.y = -2;
+  textMesh.position.z = -10;
+  textGroup.add(textMesh);
+
+  // const outlineText = createOutlines({ font, message });
+  // outlineText.position.set(centerOffset, 0, 0.2);
+  // textGroup.add(outlineText);
+
+  
+
+  textGroup.userData.update = (t) => {
+    let timeStep = t * 0.005;
+    outlineText.update(timeStep);
+  };
+  return textGroup;
+}
+
+function createText({ font, message }) {
+  const textGroup = new THREE.Group();
+  const props = {
+    font,
+    size: 1,
+    depth: 0.1,
+    curveSegments: 6,
+    bevelEnabled: true,
+    bevelThickness: 0.08,
+    bevelSize: 0.01,
+    bevelOffset: 0,
+    bevelSegments: 2,
+  };
+  const textGeo = new TextGeometry(message, props);
+  textGeo.computeBoundingBox();
+  const centerOffset = -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
+  // const glassMat = new THREE.MeshPhysicalMaterial({
+  //   roughness: 0.5,
+  //   transmission: 1.0,
+  //   transparent: true,
+  //   thickness: 1.0,
+  // });
+  const glassMat = new THREE.MeshPhysicalMaterial({
+    envMap: envMap,
+    envMapIntensity: 1.0,
+    color: 0xffffff,      // Light pink
+    metalness: 1.0,       // Maximum metalness
+    roughness: 0.1,       // Very low roughness for maximum shininess
+    clearcoat: 1.0,       // Add clearcoat for extra shine
+    clearcoatRoughness: 0.1, // Make the clearcoat glossy
+    reflectivity: 1.0,    // Maximum reflectivity
+    transparent: true,
+    // opacity: 0.7,         // Slightly more opaque
+    transmission: 0.3     // Less transmission for more metallic look
+});
+  const textMesh = new THREE.Mesh(textGeo, glassMat);
+  // const textMesh = new THREE.Mesh(textGeo);
+  textMesh.position.x = centerOffset;
+  textMesh.position.z = -4;
+  textGroup.add(textMesh);
+
+  const outlineText = createOutlines({ font, message });
+  outlineText.position.set(centerOffset, 0, 0.2);
+  textGroup.add(outlineText);
+
+  
+
+  textGroup.userData.update = (t) => {
+    let timeStep = t * 0.005;
+    outlineText.update(timeStep);
+  };
+  return textGroup;
+}
+
+loadFont();
+// animate();
+
 
 // const fontLoader = new TTFLoader();
 // fontLoader.load("./Lacupra-Bubble.ttf", (res) => {
@@ -596,12 +957,32 @@ animate();
 //     const textGeo = new TextGeometry("Abby Reese", props);
 //     textGeo.computeBoundingBox();
 //     const centerOffset = -0.5 * (
-//         textGeo.boundingBox.max.x = textGeo.boundingBox.min.x
+//         textGeo.boundingBox.max.x - textGeo.boundingBox.min.x
 //     );
-//     const mat = new THREE.MeshStandardMaterial({ color: 0xff9900});
+//     const mat = new THREE.MeshStandardMaterial({ color: 0xff9900, wireframe: true});
 //     const textMesh = new THREE.Mesh(textGeo, mat);
 //     // textMesh.postition.x = centerOffset;
 //     scene.add(textMesh);
-//     // console.log(res)
 
+//     const strokeGroup = new THREE.Group();
+//     const lineMaterial = new LineMaterial({
+//         color:0xffffff,
+//         linewidth:3
+//     });
+//     // console.log(res)
+//     const shapes = font.generateShapes("Abby Reese", 1);
+//     shapes.forEach((s) => {
+//         let points = s.getPoints();
+//         let points3d = [];
+//         points.forEach((p) =>{ 
+//         points3d.push(p.x, p.y, 0)
+//         });
+//         const lineGeo = new LineGeometry();
+//         lineGeo.setPositions(points3d);
+//         const strokeMesh = new Line2(lineGeo, lineMaterial);
+//         strokeMesh.computeLineDistances();
+//         strokeGroup.add(strokeMesh);
+//     });
+//     scene.add(strokeGroup);
+    
 // });
