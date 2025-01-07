@@ -19,7 +19,7 @@ let loadedAssets = 0;
 const p1text = `
 <div>
     <h3>React, Node.js, Express, Postgresql</h3>
-    <p><strong>Problem:</strong> My mom bough the 'Couch Guestbook' which is a fun guest log, but no one ever takes the time to fill it out.</p>
+    <p><strong>Problem:</strong> My mom bought the 'Couch Guestbook' which is a fun guest log, but no one ever takes the time to fill it out.</p>
     <p><strong>Solution:</strong> Convert the guestbook into a digital logging system, where users can scan a QR code to fill out the guestbook log on their phone.</p>
     <p></p>
     <ul>
@@ -220,7 +220,7 @@ const loader = new FBXLoader();
 const arrows = [];
 function addArrow() {
     loader.load(
-        '16.fbx',   
+        './16.fbx',   
         (object) => {
             // change material
             object.traverse((child) => {
@@ -427,7 +427,7 @@ Array(60).fill().forEach(addArrow);
 // video.autoplay = true;
 // video.play();
 const video = document.createElement('video');
-video.src = 'background-vid.mp4';
+video.src = './background-vid.mp4';
 video.addEventListener('loadeddata', () => {
     console.log('Video loaded successfully');
     updateLoadingProgress();
@@ -460,9 +460,9 @@ scene.background = videoTexture;
 
 const moonTexture = new THREE.TextureLoader().load('moon.jpg', updateLoadingProgress);
 const normalTexture = new THREE.TextureLoader().load('normal.jpg', updateLoadingProgress);
-const p1Texture = new THREE.TextureLoader().load('p1.png', updateLoadingProgress);
-const p2Texture = new THREE.TextureLoader().load('p2.png', updateLoadingProgress);
-const p3Texture = new THREE.TextureLoader().load('p3.png', updateLoadingProgress);
+const p1Texture = new THREE.TextureLoader().load('./p1.png', updateLoadingProgress);
+const p2Texture = new THREE.TextureLoader().load('./p2.png', updateLoadingProgress);
+const p3Texture = new THREE.TextureLoader().load('./p3.png', updateLoadingProgress);
 
 
 const abby = new THREE.Mesh(
