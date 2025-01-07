@@ -137,14 +137,14 @@ const scene = new THREE.Scene();
 // - field of view (75/360), aspect ratio (based off browser window), view frustrum (many objects are visible from camera lense)
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-// ADD AUDIO ???
-const listener = new THREE.AudioListener();
-camera.add(listener);
-// create a global audio source
-const sound = new THREE.Audio( listener );
+// // ADD AUDIO ???
+// const listener = new THREE.AudioListener();
+// camera.add(listener);
+// // create a global audio source
+// const sound = new THREE.Audio( listener );
 
-// load a sound and set it as the Audio object's buffer
-const audioLoader = new THREE.AudioLoader();
+// // load a sound and set it as the Audio object's buffer
+// const audioLoader = new THREE.AudioLoader();
 //______________________________________________________________________ -- add audio
 // audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
 // 	sound.setBuffer( buffer );
@@ -186,13 +186,62 @@ const torus = new THREE.Mesh( geometry, material );
 
 // scene.add(torus);
 
-const spotLight = new THREE.PointLight(0xffffff, 700); 
+// Create multiple point lights for better text coverage
+const textLights = [];
+
+// Create center light with higher intensity
+const centerLight = new THREE.PointLight(0xFF69B4, 200);
+centerLight.position.set(0, 0, 2); // Position slightly in front of text
+textLights.push(centerLight);
+
+// Create array of lights to spread across text
+const sideCount = 3; // Number of lights on each side
+const spread = 4; // How far lights spread horizontally
+const intensity = 100; // Intensity for side lights
+
+for (let i = 0; i < sideCount; i++) {
+    // Left side lights
+    const leftLight = new THREE.PointLight(0xFF69B4, intensity);
+    leftLight.position.set(-spread * (i + 1) / sideCount, 0, 2);
+    textLights.push(leftLight);
+    
+    // Right side lights
+    const rightLight = new THREE.PointLight(0xFF69B4, intensity);
+    rightLight.position.set(spread * (i + 1) / sideCount, 0, 2);
+    textLights.push(rightLight);
+}
+
+// Create a light group to manage all text lights
+const textLightGroup = new THREE.Group();
+textLights.forEach(light => textLightGroup.add(light));
+
+// Position the entire light group relative to the text
+textLightGroup.position.z = -4; // Match text z-position
+textLightGroup.position.y = 0.5; // Slightly above text center
+
+// Add the light group to the scene
+scene.add(textLightGroup);
+
+// Optional: Add subtle ambient light to prevent completely dark areas
+const textAmbient = new THREE.AmbientLight(0xFF69B4, 2);
+scene.add(textAmbient);
+
+// If you want the lights to move slightly for dynamic effect, 
+// add this to your animate function:
+function updateTextLights(timeStep) {
+    textLights.forEach((light, index) => {
+        const offset = index * (Math.PI / textLights.length);
+        light.position.y = Math.sin(timeStep * 0.001 + offset) * 0.2;
+    });
+}
+
+const spotLight = new THREE.AmbientLight(0xFF69B4, 400); 
 spotLight.position.set(0, 10, 10); // Position above and in front of the text
 spotLight.angle = Math.PI / 4; // 45-degree angle
-spotLight.penumbra = 0.1; // Soft edge of the spotlight
+spotLight.penumbra = 1; // Soft edge of the spotlight
 spotLight.decay = 2; // Physical light decay
 spotLight.distance = 200; // Maximum distance of light
-spotLight.position.set(0, 0, -10); // Point at the text position
+spotLight.position.set(0, 0, 100); // Point at the text position
 const ambientLight = new THREE.AmbientLight(0xffffff, 4); // Lower intensity for ambient to maintain contrast
 const movingLight1 = new THREE.PointLight(0xffffff, 100); 
 const movingLight2 = new THREE.PointLight(0xffffff, 100); // White light
@@ -201,7 +250,7 @@ const movingLight3 = new THREE.PointLight(0xffffff, 100);
 // spotLight.position.set(4,4,4);
 
 // add the object (light) to the scene
-scene.add(spotLight);
+// scene.add(spotLight);
 // scene.add(spotLight.target);
 scene.add(movingLight1, movingLight2);
 
