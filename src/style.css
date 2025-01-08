@@ -210,11 +210,11 @@ canvas {
     padding: 0;
     grid-column: 2 / span 9;
     margin-bottom: var(--spacing);
-    background-color: rgba(0, 0, 0, 0.5);
+    /* background-color: rgba(0, 0, 0, 0.5); */
   }
 
   blockquote p {
-    color: #ff4ea7;
+    color: #880044;
     background-color: rgb(162, 0, 255, .5);
     background: 50%;
     font-size: 1rem;
