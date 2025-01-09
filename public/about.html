@@ -38,92 +38,99 @@
   
         <!-- <section></section> -->
   
-        <section class="section-container">
-          <div  class="text-content">
-            <h2>👋 Hi, I'm Abby</h2>
-          <p>
-            I am a second year student at Northeastern University studying Computer Science.
-          </p>
-  
-          <p>
-            Currently I am creating my newest website, Kara.io, and learning the MERN stack.
-          </p>
-  
-          <p>
-            I am interested in web development because it is a great way to solve problems and 
-            create fun and useful products.
-          </p>
-          </div>
-
+        <div class="about-container">
+          <section class="section-container">
+            <div  class="text-content">
+              <h2>👋 Hi, I'm Abby</h2>
+            <p>
+              I am a second year student at Northeastern University studying Computer Science.
+            </p>
+    
+            <p>
+              Currently I am creating my newest website, Kara.io, and learning the MERN stack.
+            </p>
+    
+            <p>
+              I am interested in web development because it is a great way to solve problems and 
+              create fun and useful products.
+            </p>
+            </div>
+          </section> 
           <img class="about-image" src="abby1.jpg" alt="">
-          
+        </div>
   
-        </section> 
-  
-        <section class="section-container">
-          <div class="text-content">
-            <h2>💻 Skills</h2>
-          <p>
-            I am proficient in Java, JS/HTML/CSS, and C. I enjoy using React, Express, Postgresql and Node.js 
-            for most of my projects currently. 
-          </p>
-  
-          <p>
-            I have taken courses in algorithms and data structures, databases, mathematics of data models, and computer systems.
-          </p>
-  
-          <p>
-            Languages: Java, C, JavaScript, HTML/CSS | Frameworks: React, Node.js, Vue.js, WordPress, Three.js | 
-  Developer Tools: Git, VS Code, Eclipse | Operating Systems: Windows, Ubuntu Linux
-          </p>
-          </div>
-          
+        <div class="about-containter">
+          <section class="section-container">
+            <div class="text-content">
+              <h2>💻 Skills</h2>
+            <p>
+              I am proficient in Java, JS/HTML/CSS, and C. I enjoy using React, Express, Postgresql and Node.js 
+              for most of my projects currently. 
+            </p>
+    
+            <p>
+              I have taken courses in algorithms and data structures, databases, mathematics of data models, and computer systems.
+            </p>
+    
+            <p>
+              Languages: Java, C, JavaScript, HTML/CSS | Frameworks: React, Node.js, Vue.js, WordPress, Three.js | 
+    Developer Tools: Git, VS Code, Eclipse | Operating Systems: Windows, Ubuntu Linux
+            </p>
+            </div>
+            
+            
+          </section> 
           <img class="about-image" src="stonehedge.jpg" alt="">
-        </section> 
+        </div>
   
-        <section class="section-container">
-          <div class="text-content">
-            <h2>🥅 Personal Goals</h2>
-          <p>
-            I want to keep improving my programming skills so that I can create software that will
-            make a positive impact in the world. I would love to work at a company that values making a positive impact 
-            by creating products that make our lives easy and our daily tasks more convenient. 
-          </p>
-  
-          <p>
-            A big goal of mine this year is to collaborate on programming projects, as I tend to 
-            work solo as of now.
-          </p>
-  
-          <p>
-            I am currently learning the MERN stack and I hope to master that eventually. Next, I would 
-            like to learn python and make some projects with the language.
-          </p>
-          </div>
+        <div class="about-container">
+          <section class="section-container">
+            <div class="text-content">
+              <h2>🥅 Personal Goals</h2>
+            <p>
+              I want to keep improving my programming skills so that I can create software that will
+              make a positive impact in the world. I would love to work at a company that values making a positive impact 
+              by creating products that make our lives easy and our daily tasks more convenient. 
+            </p>
+    
+            <p>
+              A big goal of mine this year is to collaborate on programming projects, as I tend to 
+              work solo as of now.
+            </p>
+    
+            <p>
+              I am currently learning the MERN stack and I hope to master that eventually. Next, I would 
+              like to learn python and make some projects with the language.
+            </p>
+            </div>
+            
+    
+          </section> 
           <img class="about-image" src="scenic.jpg" alt="">
-  
-        </section> 
-  
-        <section  class="light section-contianer">
-          <div class="text-content">
-            <h2>🥁 Hobbies</h2>
-  
-          <p>
-            Outside of coding I enjoy running, travel, graphic design, and camping/being in nature.
-          </p>
-  
-          <p>
-            I love listening to and playing music. I am currently a percussionist in the Northeastern Concert Band.
-            My favorite artists include Nicki Minaj. 
-          </p>
 
-          </div>
-          
+        </div>
+        
+  
+        <div class="about-container">
+          <section  class="light section-contianer">
+            <div class="text-content">
+              <h2>🥁 Hobbies</h2>
+    
+            <p>
+              Outside of coding I enjoy running, travel, graphic design, and camping/being in nature.
+            </p>
+    
+            <p>
+              I love listening to and playing music. I am currently a percussionist in the Northeastern Concert Band.
+              My favorite artists include Nicki Minaj. 
+            </p>
+  
+            </div>
+  
+          </section>
           <img class="about-image" src="bookstore.jpg" alt="">
-          
-  
-        </section>
-  
+        </div>
+        
         <!-- <section class="light">
           <h2>💻 Hobbies</h2>
   
@@ -372,6 +379,7 @@
           line-height: 1.5;
           color: white;
           flex-wrap: wrap;
+          flex: wrap;
           }
 
           .text-content {
@@ -379,9 +387,16 @@
           }
 
           .about-image {
-          max-width: 300px; /* Adjust width of the image */
-          height: auto; /* Maintain aspect ratio */
-          object-fit: cover; /* Optional: Adjust image fit */
+          max-width: 300px; 
+          height: auto; 
+          /* object-fit: cover; Optional: Adjust image fit */
+          border-radius: 8px;
+          }
+
+          .about-contianer {
+            display: flex;
+            align-items: flex-start;
+            gap: 200px;
           }
 
       
