@@ -38,8 +38,9 @@
   
         <!-- <section></section> -->
   
-        <section>
-          <h2>👋 Hi, I'm Abby</h2>
+        <section class="section-container">
+          <div  class="text-content">
+            <h2>👋 Hi, I'm Abby</h2>
           <p>
             I am a second year student at Northeastern University studying Computer Science.
           </p>
@@ -52,11 +53,14 @@
             I am interested in web development because it is a great way to solve problems and 
             create fun and useful products.
           </p>
+          </div>
+          
   
         </section> 
   
-        <section>
-          <h2>💻 Skills</h2>
+        <section class="section-container">
+          <div class="text-content">
+            <h2>💻 Skills</h2>
           <p>
             I am proficient in Java, JS/HTML/CSS, and C. I enjoy using React, Express, Postgresql and Node.js 
             for most of my projects currently. 
@@ -70,11 +74,14 @@
             Languages: Java, C, JavaScript, HTML/CSS | Frameworks: React, Node.js, Vue.js, WordPress, Three.js | 
   Developer Tools: Git, VS Code, Eclipse | Operating Systems: Windows, Ubuntu Linux
           </p>
+          </div>
+          
   
         </section> 
   
-        <section>
-          <h2>🥅 Personal Goals</h2>
+        <section class="section-container">
+          <div class="text-content">
+            <h2>🥅 Personal Goals</h2>
           <p>
             I want to keep improving my programming skills so that I can create software that will
             make a positive impact in the world. I would love to work at a company that values making a positive impact 
@@ -90,11 +97,14 @@
             I am currently learning the MERN stack and I hope to master that eventually. Next, I would 
             like to learn python and make some projects with the language.
           </p>
+          </div>
+          
   
         </section> 
   
-        <section class="light">
-          <h2>🥁 Hobbies</h2>
+        <section  class="light section-contianer">
+          <div class="text-content">
+            <h2>🥁 Hobbies</h2>
   
           <p>
             Outside of coding I enjoy running, travel, graphic design, and camping/being in nature.
@@ -104,12 +114,11 @@
             I love listening to and playing music. I am currently a percussionist in the Northeastern Concert Band.
             My favorite artists include Nicki Minaj. 
           </p>
+
+          </div>
+          
   
-          <!-- <h2>🏆 Accomplishments</h2>
-  
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p> -->
+          
   
         </section>
   
@@ -346,7 +355,32 @@
           font-size: 1.25rem;
           line-height: 1.5;
           margin-bottom: var(--spacing);
+          color: white;
         }
+
+        .section-container {
+          display: flex;
+          align-items: center; /* Vertically align items */
+          justify-content: space-between; /* Space between text and image */
+          gap: 1rem; /* Optional: Adjust spacing between text and image */
+          padding: 1rem;
+          background: rgba(68, 0, 52, 0.5);
+          font-size: 1.25rem;
+          line-height: 1.5;
+          color: white;
+          flex-wrap: wrap;
+          }
+
+          .text-content {
+          flex: 1; /* Allow the text content to take up remaining space */
+          }
+
+          .about-image {
+          max-width: 300px; /* Adjust width of the image */
+          height: auto; /* Maintain aspect ratio */
+          object-fit: cover; /* Optional: Adjust image fit */
+          }
+
       
         blockquote {
           margin: 0;
