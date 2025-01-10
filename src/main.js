@@ -157,7 +157,10 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 // use canvas as dom element to render from
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#moon-bg'),
+  alpha: true,
+  antialias: true,
 });
+renderer.sortObjects = true;
 
 renderer.setPixelRatio( window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -279,10 +282,12 @@ function addArrow() {
                         metalness: 0.7,    // Makes it more metallic/shiny
                         roughness: 0.2,    // Lower roughness = more shiny
                         emissive: 0xFF69B4, // Makes it glow slightly
-                        emissiveIntensity: 0.2 // Controls glow strength
+                        emissiveIntensity: 0.2, // Controls glow strength
+                        depthWrite: true,
+                        depthTest: true
                     });
                     child.material = newMaterial;
-                    child.renderOrder = -1;
+                    child.renderOrder = -1000;
                 }
             });
             // Random position
@@ -551,6 +556,10 @@ const abby = new THREE.Mesh(
 //   new THREE.MeshBasicMaterial({ map: abbyTexture })
 // );
 
+abby.renderOrder = 0;
+abby2.renderOrder = 0;
+abby3.renderOrder = 0;
+
 scene.add(abby);
 
 // const abby2 = new THREE.Mesh(
@@ -748,6 +757,7 @@ function loadFont() {
   loader.load("./Lacupra-Bubble.ttf", (res) => {
     const font = new Font(res);
     text = createText({ font, message: "Abby Reese" });
+    text.renderOrder = 0;
     // subtitle = createSubtitle({ font, message: "Computer Science @ Northeastern University"})
     scene.add(text);
     animate();
@@ -755,6 +765,7 @@ function loadFont() {
   loader.load("./HEXA.ttf", (res) => {
     const font = new Font(res);
   // text = createText({ font, message: "Abby Reese" });
+  subtitle.renderOrder = 0;
   subtitle = createSubtitle({ font, message: `Computer Science\n @ Northeastern University`})
   scene.add(subtitle);
   animate();
