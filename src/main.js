@@ -17,78 +17,61 @@ let loadedAssets = 0;
 
 const p1text = `
 <div>
-    <h3>React, Node.js, Express, Postgresql</h3>
-    <p><strong>Problem:</strong> My mom bought the 'Couch Guestbook' which is a fun guest log, but no one ever takes the time to fill it out.</p>
-    <p><strong>Solution:</strong> Convert the guestbook into a digital logging system, where users can scan a QR code to fill out the guestbook log on their phone.</p>
-    <p></p>
+    <h3>React, Node.js, Express, PostgreSQL</h3>
+    <p><strong>Problem:</strong> My mom bought the 'Couch Guestbook,' which is a fun guest log, but no one ever takes the time to fill it out.</p>
+    <p><strong>Solution:</strong> Convert the guestbook into a digital logging system where users can scan a QR code to fill out the guestbook log on their phones.</p>
     <ul>
       <li>
-        
-        I created a full-stack web application that streamlines the guestbook experience through QR codes, solving the
-challenge of gathering guest logs on paper. I did this by developing a React frontend with Firebase authentication and
-implementing a Node.js/Express backend with PostgreSQL. The project resulted as a scalable system that enables families,
-friends, and businesses to generate, manage, and analyze guest reviews through easily deployable QR codes. I am planning on deploying this website
-once I can polish the styling, but I have personally used this for guestbook logs.
-            
+        I created a full-stack web application that streamlines the guestbook experience through QR codes, solving the challenge of gathering guest logs on paper. I did this by developing a React frontend with Firebase authentication and implementing a Node.js/Express backend with PostgreSQL. The project resulted in a scalable system that enables families, friends, and businesses to generate, manage, and analyze guest reviews through easily deployable QR codes. I am planning on deploying this website once I polish the styling, but I have personally used it for guestbook logs.
+      </li>
       <li>
-        I designed an intuitive user interface for creating, sorting, and managing QR code-based logs, addressing
-user friction by implementing dynamic form customization, mobile-responsive layouts using Tailwind CSS, and
-streamlined navigation flows. Users have a seamless experience that allows users to generate QR codes, customize
-guestbook form fields, and view submitted forms in an organized dashboard.
-
-      
+        I designed an intuitive user interface for creating, sorting, and managing QR code-based logs, addressing user friction by introducing dynamic form customization, mobile-responsive layouts using Tailwind CSS, and streamlined navigation flows. Users have a seamless experience that allows them to generate QR codes, customize guestbook form fields, and view submitted forms in an organized dashboard.
+      </li>
     </ul>
-    <p><strong>Project Takeaways:</strong>
-    This was my first time learning about and using indexes. This was also the first robust CRUD application I created, which taught me a lot about RESTful APIs. Lastly, I learned about rate limiting by checking a users IP addresses.
+    <p><strong>Project Takeaways:</strong> 
+    This was my first time learning about and using indexes. This was also the first robust CRUD application I created, which taught me a lot about RESTful APIs. Lastly, I learned about rate limiting by checking a user's IP address.
     </p>
     <a href="https://github.com/abby-ux/LogQR" class="project-link">GitHub</a>
 </div>
-                  `;
-
+`;
 
 const p2text = `
 <div>
     <h3>React, Node.js, Express, MongoDB, Socket.io</h3>
-    <p><strong>Problem:</strong>I love doing karaoke with my friends, but it gets difficult to keep the sessions interesting or structured in large groups sometimes.</p>
-    <p><strong>Solution:</strong>Create a website that lets users host gamified karaoke session for their friends to join! Use YouTube to pull karaoke playlists and songs.</p>
-    <p></p>
+    <p><strong>Problem:</strong> I love doing karaoke with my friends, but it gets difficult to keep the sessions interesting or structured in large groups sometimes.</p>
+    <p><strong>Solution:</strong> Create a website that lets users host gamified karaoke sessions for their friends to join! Use YouTube to pull karaoke playlists and songs.</p>
     <ul>
       <li>
-        This project is not finished yet, but so far I have implement a waiting room where the host and users are able to see players that 
-        join in real time, using Socket.io. I used MongoDB and mongoose to track user and game creations, and I used RESTful apis to manage creating and accessing game and player information.
-             
+        This project is not finished yet, but so far, I have implemented a waiting room where the host and users can see players join in real-time using Socket.io. I used MongoDB and Mongoose to track users and game creations, and I used RESTful APIs to manage creating and accessing game and player information.
+      </li>
     </ul>
-    <p><strong>Project Takeaways:</strong>
-    This project taught me how important design planning was. I did not factor real time functionality into my first iteration and had a lot of trouble integrating Socket.io at first. After I took a step back, I realized my mistake with Socket.io and learned a lot about 
-    the importance of planning ahead of time. Although I did not end up choosing Spotify to get playlists, I did test it out and learned 
-    some valuable things about using Spotify APIs through this.
+    <p><strong>Project Takeaways:</strong> 
+    This project taught me how important design planning is. I did not factor real-time functionality into my first iteration and had a lot of trouble integrating Socket.io at first. After taking a step back, I realized my mistake with Socket.io and learned a lot about the importance of planning ahead. Although I did not end up choosing Spotify to get playlists, I tested it out and learned some valuable things about using Spotify APIs.
     </p>
     <a href="https://github.com/abby-ux/karaoke-jam" class="project-link">GitHub</a>
 </div>
-                  `;
-          
-                  
+`;
+
 const p3text = `
 <div>
     <h3>React, Node.js, Express, SQLite3</h3>
-    <p><strong>Problem:</strong>Come up with an interesting project (that doesn't envolve writing as essay) for my Tech & Human values
-    final class project.</p>
-    <p><strong>Solution:</strong>Create a chatbot that discusses ethical dilemmas from various philisophical perspectives using rule 
-    based JSON responses.</p>
-    <p></p>
+    <p><strong>Problem:</strong> Come up with an interesting project (that doesn't involve writing an essay) for my Tech & Human Values final class project.</p>
+    <p><strong>Solution:</strong> Create a chatbot that discusses ethical dilemmas from various philosophical perspectives using rule-based JSON responses.</p>
     <ul>
       <li>
-      I implemented a full-stack web app that first has a user fill out a form on various opinions, then chat with a chatbot, and fill out another form after the conversation. The goal of this project was to measure humans fascination with technology, and how it can be dangerous at times.
+        I implemented a full-stack web app where a user first fills out a form on various opinions, then chats with a chatbot, and finally fills out another form after the conversation. The goal of this project was to measure human fascination with technology and how it can be dangerous at times.
+      </li>
       <li>
-      I created my backend with Express and SQLite to save form responses and chat conversations that I later analyzed.
-     
+        I created my backend with Express and SQLite to save form responses and chat conversations that I later analyzed.
+      </li>
     </ul>
-    <p><strong>Project Takeaways:</strong>
-    Although this started at a project for a philiosophy class I had a great time making it. Using JSON responses was very simple, and it opened my eyes to how easily humans will assume any type of technology is intelligent. This was my first time using SQLite and it was a great experience.
+    <p><strong>Project Takeaways:</strong> 
+    Although this started as a project for a philosophy class, I had a great time making it. Using JSON responses was very simple, and it opened my eyes to how easily humans assume any type of technology is intelligent. This was my first time using SQLite, and it was a great experience.
     </p>
-    <a href="https://github.com/abby-ux/philisophical-dilemmas-chatbot" class="project-link">GitHub</a>
+    <a href="https://github.com/abby-ux/philosophical-dilemmas-chatbot" class="project-link">GitHub</a>
 </div>
-                  `;
+`;
+
 
 function updateLoadingProgress() {
     loadedAssets++;
@@ -318,7 +301,6 @@ function addArrow() {
             //     object.rotation.x += object.rotationSpeed.x;
             //     object.rotation.y += object.rotationSpeed.y;
             //     object.rotation.z += object.rotationSpeed.z;
-            //     // ... rest of your animate code
             // }
         },
         (xhr) => {
@@ -338,14 +320,6 @@ function addArrow() {
 const stars = [];
 
 function addShape() {
-
-    // Create more interesting geometry options
-//   const geometries = [
-//     new THREE.TetrahedronGeometry(0.4), // Four-sided pyramid
-//     new THREE.OctahedronGeometry(0.4),  // Eight-sided diamond
-//     new THREE.IcosahedronGeometry(0.4), // Twenty-sided polyhedron
-//     new THREE.TorusGeometry(0.3, 0.1, 8, 8) // Small donut shape
-//   ];
 
 //   // Randomly select a geometry
 //   const geometry = geometries[Math.floor(Math.random() * geometries.length)];
@@ -996,52 +970,3 @@ function createText({ font, message }) {
 }
 
 loadFont();
-// animate();
-
-
-// const fontLoader = new TTFLoader();
-// fontLoader.load("./Lacupra-Bubble.ttf", (res) => {
-//     const font = new Font(res);
-//     const props = {
-//         font,
-//         size: 1,
-//         depth: .5,
-//         curveSegments: 6,
-//         bevelEnabled: true,
-//         bevelThickness: 0.08,
-//         bevelSize: 0.01,
-//         bevelOffset: 0,
-//         bevelSegments: 2,
-//     };
-//     const textGeo = new TextGeometry("Abby Reese", props);
-//     textGeo.computeBoundingBox();
-//     const centerOffset = -0.5 * (
-//         textGeo.boundingBox.max.x - textGeo.boundingBox.min.x
-//     );
-//     const mat = new THREE.MeshStandardMaterial({ color: 0xff9900, wireframe: true});
-//     const textMesh = new THREE.Mesh(textGeo, mat);
-//     // textMesh.postition.x = centerOffset;
-//     scene.add(textMesh);
-
-//     const strokeGroup = new THREE.Group();
-//     const lineMaterial = new LineMaterial({
-//         color:0xffffff,
-//         linewidth:3
-//     });
-//     // console.log(res)
-//     const shapes = font.generateShapes("Abby Reese", 1);
-//     shapes.forEach((s) => {
-//         let points = s.getPoints();
-//         let points3d = [];
-//         points.forEach((p) =>{ 
-//         points3d.push(p.x, p.y, 0)
-//         });
-//         const lineGeo = new LineGeometry();
-//         lineGeo.setPositions(points3d);
-//         const strokeMesh = new Line2(lineGeo, lineMaterial);
-//         strokeMesh.computeLineDistances();
-//         strokeGroup.add(strokeMesh);
-//     });
-//     scene.add(strokeGroup);
-    
-// });
